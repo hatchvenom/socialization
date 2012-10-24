@@ -33,7 +33,7 @@ class SocializationGenerator < Rails::Generators::Base
       sleep 1 # wait a second to have a unique migration timestamp
       migration_template "#{options[:store]}/migration_likes.rb",    'db/migrate/create_likes.rb'
       sleep 1 # wait a second to have a unique migration timestamp
-      migration_template "#{options[:store]}/migration_favorites.rb",    'db/migrate/create_likes.rb'
+      migration_template "#{options[:store]}/migration_favorites.rb",    'db/migrate/create_favorites.rb'
       sleep 1 # wait a second to have a unique migration timestamp
       migration_template "#{options[:store]}/migration_mentions.rb", 'db/migrate/create_mentions.rb'
     end
