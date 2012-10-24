@@ -63,6 +63,7 @@ def use_redis_store
   Socialization.follow_model = Socialization::RedisStores::Follow
   Socialization.mention_model = Socialization::RedisStores::Mention
   Socialization.like_model = Socialization::RedisStores::Like
+  Socialization.favorite_model = Socialization::RedisStores::Favorite
   setup_model_shortcuts
 end
 
@@ -70,6 +71,7 @@ def use_ar_store
   Socialization.follow_model = Socialization::ActiveRecordStores::Follow
   Socialization.mention_model = Socialization::ActiveRecordStores::Mention
   Socialization.like_model = Socialization::ActiveRecordStores::Like
+  Socialization.favorite_model = Socialization::ActiveRecordStores::Favorite
   setup_model_shortcuts
 end
 
@@ -127,6 +129,14 @@ ActiveRecord::Schema.define(:version => 0) do
     t.datetime :created_at
   end
 
+  create_table :favorites do |t|
+    t.string  :favoriter_type
+    t.integer :favoriter_id
+    t.string  :favoritable_type
+    t.integer :favoritable_id
+    t.datetime :created_at
+  end
+
   create_table :mentions do |t|
     t.string  :mentioner_type
     t.integer :mentioner_id
@@ -148,6 +158,14 @@ ActiveRecord::Schema.define(:version => 0) do
   end
 
   create_table :im_a_likeables do |t|
+    t.timestamps
+  end
+
+  create_table :im_a_favoriters do |t|
+    t.timestamps
+  end
+
+  create_table :im_a_favoritables do |t|
     t.timestamps
   end
 
@@ -178,6 +196,8 @@ class User < ActiveRecord::Base
   acts_as_followable
   acts_as_liker
   acts_as_likeable
+  acts_as_favoriter
+  acts_as_favoritable
   acts_as_mentionable
 
   has_many :comments
@@ -191,6 +211,7 @@ end
 
 class Movie < ActiveRecord::Base
   acts_as_likeable
+  acts_as_favoritable
   has_many :comments
 end
 
@@ -217,6 +238,16 @@ class ImALikeable < ActiveRecord::Base
   acts_as_likeable
 end
 class ImALikeableChild < ImALikeable; end
+
+class ImAFavoriter < ActiveRecord::Base
+  acts_as_favoriter
+end
+class ImAFavoriterChild < ImAFavoriter; end
+
+class ImAFavoritable < ActiveRecord::Base
+  acts_as_favoritable
+end
+class ImAFavoritableChild < ImAFavoritable; end
 
 class ImAMentioner < ActiveRecord::Base
   acts_as_mentioner

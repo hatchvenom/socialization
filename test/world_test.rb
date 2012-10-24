@@ -26,24 +26,36 @@ class WorldTest < Test::Unit::TestCase
 
   def test_the_world
     john.like!(pulp)
+    john.favorite!(pulp)
     john.follow!(jane)
     john.follow!(travolta)
 
     assert john.likes?(pulp)
+    assert john.favorites?(pulp)
     assert john.follows?(jane)
     assert john.follows?(travolta)
 
     assert pulp.liked_by?(john)
+    assert pulp.favorited_by?(john)
     assert travolta.followed_by?(john)
 
     carl.like!(pulp)
     camilo.like!(pulp)
     assert_equal 3, pulp.likers(User).size
 
+    carl.favorite!(pulp)
+    camilo.favorite!(pulp)
+    assert_equal 3, pulp.favoriters(User).size
+
     assert pulp.likers(User).include?(carl)
     assert pulp.likers(User).include?(john)
     assert pulp.likers(User).include?(camilo)
     assert !pulp.likers(User).include?(mat)
+
+    assert pulp.favoriters(User).include?(carl)
+    assert pulp.favoriters(User).include?(john)
+    assert pulp.favoriters(User).include?(camilo)
+    assert !pulp.favoriters(User).include?(mat)
 
     carl.follow!(mat)
     mat.follow!(carl)

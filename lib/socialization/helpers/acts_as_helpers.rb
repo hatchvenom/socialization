@@ -25,6 +25,16 @@ module Socialization
         include Socialization::Likeable
       end
 
+      # Make the current class a {Socialization::Favoriter}
+      def acts_as_favoriter(opts = {})
+        include Socialization::Favoriter
+      end
+
+      # Make the current class a {Socialization::Favoritable}
+      def acts_as_favoritable(opts = {})
+        include Socialization::Favoritable
+      end
+
       # Make the current class a {Socialization::Mentioner}
       def acts_as_mentioner(opts = {})
         include Socialization::Mentioner

@@ -20,6 +20,18 @@ module Socialization
       end
     end
 
+    def favorite_model=(klass)
+      @favorite_model = klass
+    end
+
+    def favorite_model
+      if @favorite_model
+        @favorite_model
+      else
+        ::Favorite
+      end
+    end
+
     def like_model=(klass)
       @like_model = klass
     end

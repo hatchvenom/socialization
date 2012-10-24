@@ -1,5 +1,7 @@
 # Socialization
 
+NOTE: This is a fork of cmer's original version that includes a Favorite model that's exactly the same as the like model. I had a project that required both favorites and likes.
+
 Socialization is a Ruby Gem that allows any ActiveRecord model to `Follow`, `Like` and/or `Mention` any other model. ActiveRecord or Redis can be used as a data store.
 
 The Follow feature is similar to Twitter's follow. For example, John follows Jane. Unlike Facebook's "friendship", Follow is a one-way concept. The fact that John follows Jane doesn't mean that Jane follows John.

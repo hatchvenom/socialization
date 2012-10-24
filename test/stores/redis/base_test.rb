@@ -180,6 +180,7 @@ class RedisBaseStoreTest < Test::Unit::TestCase
         assert_equal ['follower', 'followable'], @klass.send(:key_type_to_type_names, Socialization::RedisStores::Follow)
         assert_equal ['mentioner', 'mentionable'], @klass.send(:key_type_to_type_names, Socialization::RedisStores::Mention)
         assert_equal ['liker', 'likeable'], @klass.send(:key_type_to_type_names, Socialization::RedisStores::Like)
+        assert_equal ['favoriter', 'favoritable'], @klass.send(:key_type_to_type_names, Socialization::RedisStores::Favorite)
       end
     end
   end
