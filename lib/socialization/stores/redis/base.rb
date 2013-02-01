@@ -89,6 +89,8 @@ module Socialization
             ['follower', 'followable']
           elsif klass.name.match(/Like$/)
             ['liker', 'likeable']
+          elsif klass.name.match(/Favorite$/)
+            ['favoriter', 'favoritable']
           elsif klass.name.match(/Mention$/)
             ['mentioner', 'mentionable']
           else
