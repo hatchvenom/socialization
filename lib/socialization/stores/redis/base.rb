@@ -103,7 +103,7 @@ module Socialization
           if victim.is_a?(String)
             "#{keys[0].pluralize.capitalize}:#{victim}"
           else
-            "#{keys[0].pluralize.capitalize}:#{victim.class}:#{victim.id}"
+            "#{keys[0].pluralize.capitalize}:#{victim.class.base_class}:#{victim.id}"
           end
         end
 
@@ -112,12 +112,12 @@ module Socialization
           if actor.is_a?(String)
             "#{keys[1].pluralize.capitalize}:#{actor}"
           else
-            "#{keys[1].pluralize.capitalize}:#{actor.class}:#{actor.id}"
+            "#{keys[1].pluralize.capitalize}:#{actor.class.base_class}:#{actor.id}"
           end
         end
 
         def generate_redis_value(obj)
-          "#{obj.class.name}:#{obj.id}"
+          "#{obj.class.base_class.name}:#{obj.id}"
         end
 
       end # class << self
